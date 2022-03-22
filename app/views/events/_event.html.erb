@@ -1,8 +1,19 @@
-<div id="<%= dom_id event %>">
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title"> 
+      <%= event.theme %>
+    </p>
+  </header>
 
-  <p>
-    <strong>Date:</strong>
-    <%= event.date %>
-  </p>
+  <div class="card-content">
+    <div class="content">
+      <p><%= event.description %></p>
+      <time datetime="">Event date: <%= event.date %></time>
+    </div>  
+  </div>
 
+  <footer class="card-footer">
+    <%= link_to "Show this event", event, class: "card-footer-item" %>
+    <%= link_to event.creator.username, event.creator, class: "card-footer-item" %>
+  </footer>
 </div>

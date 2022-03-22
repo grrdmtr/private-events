@@ -14,4 +14,24 @@
  *= require_self
  */
 
- @import "bulma"
+ @import "bulma";
+
+.card-footer {
+  width: min(20vw);
+}
+
+.columns {
+  flex-wrap: wrap;
+}
+
+.notification:not(:last-child) {
+  margin-bottom: 0;
+}
+
+#controller {
+  display: flex;
+  height: 74px;
+  gap: 15px;
+  align-items: center;
+  padding: 0.5rem;
+}

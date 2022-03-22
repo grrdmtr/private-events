@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<section class="section">
+  <div class="container">
 
-<%= render @event %>
+    <%= render @event %>
+    
+    <div class="block" id="controller">
+      <%= link_to "Back to events", events_path %>
+      
+      <% if user_signed_in? && current_user.id == @event.creator_id %>
+        <%= link_to "Edit this event", edit_event_path(@event) %>
+        <%= button_to "Destroy this event", @event, method: :delete, class:"button is-info" %>
+      <% end %>
+    </div>
 
-<div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
-  <%= link_to "Back to events", events_path %>
-
-  <%= button_to "Destroy this event", @event, method: :delete %>
-</div>
+  </div>
+</section>  
