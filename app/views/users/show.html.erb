@@ -1,17 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Events</h1>
+<h1>Users Events</h1>
 
 <div id="events">
-  <% @events.each do |event| %>
+  <% @user.events.each do |event| %>
     <%= render event %>
     <p>
       <%= link_to "Show this event", event %>
     </p>
-     <p>
-      <%= link_to event.creator.username, event.creator %>
-    </p>
   <% end %>
 </div>
-
-<%= link_to "New event", new_event_path %>
