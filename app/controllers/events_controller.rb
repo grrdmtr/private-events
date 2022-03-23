@@ -70,6 +70,15 @@ class EventsController < ApplicationController
     end
   end
   
+  def unattend
+    @event = Event.find(params[:id])
+
+    attendees_events = AttendeesEvent.find_by(attendee_id: current_user.id, event_id: @event.id)
+    attendees_events.destroy
+    
+    redirect_to @event, notice: "You are no longer attending this event!"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
