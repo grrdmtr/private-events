@@ -14,7 +14,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = current_user.events.build
+    @event = current_user.created_events.build
   end
 
   # GET /events/1/edit
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     respond_to do |format|
       if @event.save
@@ -59,6 +59,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def attend
+    @event = Event.find(params[:id])
+
+    attendees_events = AttendeesEvent.new(attendee_id: current_user.id, event_id: @event.id)
+    if attendees_events.save
+      redirect_to @event, notice: "You are now attending this event!"
+    else
+      redirect_to @event, alert: "You are already attending this event!"
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
