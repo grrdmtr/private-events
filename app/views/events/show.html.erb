@@ -1,24 +1,61 @@
 <section class="section">
   <div class="container">
-
-    <%= render @event %>
-    
-    <div class="block" id="controller">
-      <%= link_to "Back to events", events_path %>
+    <div class="columns">
+      <div class="column">
+        <%= render @event %>
       
-      <% if user_signed_in? && current_user.id == @event.creator_id %>
-        <%= link_to "Edit this event", edit_event_path(@event) %>
-        <%= button_to "Destroy this event", @event, method: :delete, class:"button is-info" %>
-      <% end %>
-
-      <% if  user_signed_in? && AttendeesEvent.exists?(attendee_id: current_user.id, event_id: @event.id) %>
-          <%= link_to 'Unattend', unattend_event_path(@event.id), 
-                                  class: "attend-btn button is-danger is-light mb-4 is-medium" %>
-      <% else %>
-          <%= link_to 'Attend', attend_event_path(@event.id), 
-                              class: "attend-btn button is-danger mb-4 is-medium" %>
-      <% end %>
+        <div class="block" id="controller">
+          <%= link_to "Back to events", events_path %>
+          
+          <% if user_signed_in? && current_user.id == @event.creator_id %>
+            <%= link_to "Edit this event", edit_event_path(@event) %>
+            <%= button_to "Destroy this event", @event, method: :delete, class:"button is-info" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="column">
+        <% if @event.date.past? %>
+            <button class="button is-danger is-medium mb-4 attend-btn" disabled>
+                Event Has Passed!
+            </button>
+        <% else %>
+            <% if  user_signed_in? && AttendeesEvent.exists?(attendee_id: current_user.id, event_id: @event.id) %>
+                <%= link_to 'Unattend', unattend_event_path(@event.id), 
+                                        class: "attend-btn button is-danger is-light mb-4 is-medium" %>
+            <% else %>
+                <%= link_to 'Attend', attend_event_path(@event.id), 
+                                    class: "attend-btn button is-danger mb-4 is-medium" %>
+            <% end %>
+        <% end %>
+        <div class="box">
+          <div class="media">
+            <div class="media-left">
+              <img src="https://img.icons8.com/material-outlined/50/000000/clock--v1.png"/>
+            </div>
+            <div class="media-content">
+              <p> <%=@event.date.strftime("%A, %B %d, %Y ")%> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column" id="attendees">
+        <div class="block attendees">
+          <h3 class="title"> Attendees (<%= @event.attendees.count %>) </h3>
+          <div class="columns is-multiline is-variable is-mobile">
+            <% @event.attendees.each do |attendee| %>
+              <div id="attendee-card" class="column is-one-quarter-fullhd is-one-quarter-widescreen is-one-third-desktop is-two-fifths-tablet is-half-mobile ">
+                <%= link_to user_path(attendee.id) do %>
+                  <div class="card ">
+                    <div class="card-content">
+                      <p class="has-text-weight-semibold has-text-centered"> <%= attendee.username %> </p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %> 
+          </div>
+        </div>
+      </div>
     </div>
-
-  </div>
-</section>  
+  </div>  
+</section>
