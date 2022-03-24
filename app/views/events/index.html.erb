@@ -1,14 +1,20 @@
 <section class="section">
   <div class="container">
     <div id="events">
-    <div class="columns">
-    
-      <% @events.each do |event| %>
-      <div class="column">
-        <%= render event %>
-      </div>
-      <% end %>
-    </div>  
+      <div class="columns">
+        <div class="column">
+          <h2 class="title is-4">Upcoming Events</h2>
+          <% @events.upcoming.each do |event| %>
+            <%= render event %>
+          <% end %>
+        </div>
+        <div class="column">
+          <h2 class="title is-4">Passed Events</h2>
+          <% @events.past.each do |event| %>
+            <%= render event %>
+          <% end %>
+        </div>
+      </div>  
     </div> 
   </div>
 </section>
