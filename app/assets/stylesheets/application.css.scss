@@ -13,8 +13,22 @@
  *= require_tree .
  *= require_self
  */
+ $primary: #e6ffde;
+ $info: #FFDEDE;
+ $link: red;
+ $success: green;
+ $warning: yellow;
+ $danger: red;
 
  @import "bulma";
+
+.navbar.is-info {
+  background-color: #ffebeb;
+}
+
+.button.is-info.is-inverted {
+  background-color: rgba(56, 56, 56, 0.7);
+}
 
 .card {
   width: min(20vw);
@@ -47,4 +61,23 @@
 
 #attendee-card {
   width: 100%;
+}
+
+a.navbar-item:hover {
+  background-color: #f14668;
+}
+
+.navbar-brand .navbar-item:hover {
+  background-color: #f14668;
+}
+
+.block.attendees {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#attendee-card {
+  display: flex;
+  justify-content: center;
 }
