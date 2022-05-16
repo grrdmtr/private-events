@@ -16,6 +16,6 @@ Creators of an event can edit or delete their events as well. Technically, creat
 * Rails version 7.0.2.4
 
 ```ruby
-$ git clone git@github.com:dm-murphy/private-events.git
+$ git clone git@github.com:grrdmtr/private-events.git
 $ bundle install
 $ rails db:migrate
